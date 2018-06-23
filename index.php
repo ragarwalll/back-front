@@ -1,5 +1,6 @@
 <?php include ( "./inc/header.inc.php" );  ?>
 <?php include ( "./inc/register.inc.php" );  ?>
+<?php include ( "./inc/login.inc.php" );  ?>
     <br></br>
     <div style="width: 1000px; margin: 0px auto 0px auto">
       <table>
@@ -7,9 +8,9 @@
           <td class="box" valign="top">
             <h2>Already a member? Log in now!</h2>
             <form action="index.php" method="POST">
-              <input type="text" name="username" size="25" placeholder="Username" /><p />
-              <input type="text" name="password" size="25" placeholder="Password" /><p />
-              <input type="submit" name="reg" value="Sign Up">
+              <input type="text" name="user_login" size="25" placeholder="Username" /><p />
+              <input type="text" name="password_login" size="25" placeholder="Password" /><p />
+              <input type="submit" name="login" value="Sign In">
             </form>
           </td>
           <td class="box "valign="top">
