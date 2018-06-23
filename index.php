@@ -2,7 +2,6 @@
 <?php include ( "./inc/register.inc.php" );  ?>
 <?php include ( "./inc/login.inc.php" );  ?>
     <br></br>
-    <div style="width: 1000px; margin: 0px auto 0px auto">
       <table>
         <tr>
           <td class="box" valign="top">

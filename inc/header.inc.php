@@ -2,6 +2,7 @@
 session_start();
 if(!isset($_SESSION["user_login"]))
 {
+  $username="";
 }
 else
 {
@@ -24,18 +25,33 @@ else
         <div class="logo">
           <img src="img/logo1.png" alt="">
         </div>
-        <div class="search_box">
-          <form action="search.php" method="GET" id="search">
-            <input type="text" name="q" size="60" placeholder="Search">
-          </form>
-        </div>
-        <nav class="main-nav">
-          <ul class="unstyled-list">
-            <li><a href="">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="https://el1arte.blogspot.com/">Blog</a></li>
-            <li><a href="">Sign Up</a></li>
-            <li><a href="">Log In</a></li>
+        <?php
+        if($username)
+        {
+          echo '
+          <div class="search_box">
+            <form action="search.php" method="GET" id="search">
+              <input type="text" name="q" size="60" placeholder="Search">
+            </form>
+          </div>
+          <nav class="main-nav">
+            <ul class="unstyled-list">
+            <li><a href="home.php">Home</a></li>
+              <li><a href="">Find Friends</a></li>
+              <li><a href="'.$username.'">Profile</a></li>
+              <li><a href="account_settings.php">Account Settings</a></li>
+              <li><a href="logout.php">Log Out</a></li>';
+          }
+          else
+          {
+              echo'<nav class="main-nav">
+              <ul class="unstyled-list">
+                <li><a href="">Blog</a></li>';
+          }
+          ?>
         </nav>
       </div>
     </header>
+    <div id="wrapper">
+<br />
+<br />
