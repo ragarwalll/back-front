@@ -25,47 +25,54 @@ if($reg)
   {
     $u_check= mysqli_query($db,"SELECT username FROM users WHERE username='$un'");
     $check=mysqli_num_rows($u_check);
-    {
+    $e_check=mysqli_query($db,"SELECT email FROM users WHERE email='$em'");
+    $email_check=mysqli_num_rows($e_check);
       if($check==0)
       {
-        if($fn&&$ln&&$un&&$em&&$em2&&$pswd&&$pswd2)
+        if($email_check==0)
         {
-          if($pswd==$pswd2)
-          {
-            if(strlen($un)>25||strlen($fn)>25||strlen($ln)>25)
+            if($fn&&$ln&&$un&&$em&&$em2&&$pswd&&$pswd2)
             {
-              echo "Username/First Name/Last Name exceeds 25 Characters";
-            }
-            else
-            {
-              if(strlen($pswd)>30||strlen($pswd)<5)
+              if($pswd==$pswd2)
               {
-                echo "Your password must be between 5 and 30 characters long";
+                if(strlen($un)>25||strlen($fn)>25||strlen($ln)>25)
+                {
+                  echo "Username/First Name/Last Name exceeds 25 Characters";
+                }
+                else
+                {
+                  if(strlen($pswd)>30||strlen($pswd)<5)
+                  {
+                    echo "Your password must be between 5 and 30 characters long";
+                  }
+                  else
+                  {
+                    $pswd=md5($pswd);
+                    $pswd=md5($pswd2);
+                    $query=mysqli_query($db,"INSERT INTO users VALUES('','$un','$fn','$ln','$em','$pswd','$d','0')");
+                    die("<h2>Welcome to El Arte Connect</h2>Login in to get started");
+                  }
+                }
               }
               else
               {
-                $pswd=md5($pswd);
-                $pswd=md5($pswd2);
-                $query=mysqli_query($db,"INSERT INTO users VALUES('','$un','$fn','$ln','$em','$pswd','$d','0')");
-                die("<h2>Welcome to El Arte Connect</h2>Login in to get started");
+                echo "Password doesn't match";
               }
             }
-          }
           else
           {
-            echo "Password doesn't match";
+            echo "Please fill every detail then proceed";
           }
         }
         else
-         {
-          echo "Please fill every detail then proceed";
+        {
+          echo "Email already exists, enter another";
         }
       }
       else
       {
         echo "Username already exists";
       }
-    }
   }
   else
   {

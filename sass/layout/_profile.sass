@@ -21,12 +21,15 @@
   padding-bottom: 5px
   padding-top: 5px
   padding-left: 0px
-  height: 200px
+  height: auto
+  min-height: 200px
+
+  text-align: justify
 
 .postForm
   float: right
   width: 560px
-  height: 80px
+  height: 170px
   background-color: #f3f6f9
   padding: 5px
 
@@ -34,5 +37,26 @@
     float: right
     width: 560px
     height: 414px
-    background-color: #dce5ee
+    background-color: #ffffff
     padding: 5px
+    text-align: justify
+
+hr
+  background-color: #dce5ee
+  height: 1px
+  border: 0px
+
+.posted_by
+  font-weight: $font-bold
+  color: #000
+  float: left
+
+.posted_by a
+  font-weight: $font-bold
+  color: #000
+  text-decoration: none
+
+.posted_by a:hover
+  font-weight: 800
+  color: #000
+  text-decoration: underline

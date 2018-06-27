@@ -8,7 +8,7 @@
             <h2>Already a member? Log in now!</h2>
             <form action="index.php" method="POST">
               <input type="text" name="user_login" size="25" placeholder="Username" /><p />
-              <input type="text" name="password_login" size="25" placeholder="Password" /><p />
+              <input type="password" name="password_login" size="25" placeholder="Password" /><p />
               <input type="submit" name="login" value="Sign In">
             </form>
           </td>
@@ -20,11 +20,11 @@
               <input type="text" name="username" size="25" placeholder="Username" /><p />
               <input type="text" name="email" size="25" placeholder="Email" /><p />
               <input type="text" name="email2" size="25" placeholder="Retype Email" /><p />
-              <input type="text" name="password" size="25" placeholder="Password" /><p />
-              <input type="text" name="password2" size="25" placeholder="Retype Password" /><p />
+              <input type="password" name="password" size="25" placeholder="Password" /><p />
+              <input type="password" name="password2" size="25" placeholder="Retype Password" /><p />
               <input type="submit" name="reg" value="Sign Up">
             </form>
           </td>
         </tr>
       </table>
-<?php include ( "./inc/footer.inc.php" );  ?>
+<?php include ( "./inc/footer.inc.php" );?> 

@@ -1,4 +1,4 @@
-<?php include ( "connect.inc.php");
+<?php include ( "./inc/connect.inc.php");
 session_start();
 if(!isset($_SESSION["user_login"]))
 {
@@ -16,6 +16,8 @@ else
     <meta name="viewport" content="width=device-width,
     initial scale=1">
     <title>El Arte</title>
+    <script src="js/main.js" type="text/javascript"></script>
+
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -31,21 +33,21 @@ else
           echo '
           <div class="search_box">
             <form action="search.php" method="GET" id="search">
-              <input type="text" name="q" size="60" placeholder="Search">
+              <input type="text" name="q" size="60" placeholder="Find friends">
             </form>
           </div>
           <nav class="main-nav">
             <ul class="unstyled-list">
             <li><a href="home.php">Home</a></li>
-              <li><a href="">Find Friends</a></li>
               <li><a href="'.$username.'">Profile</a></li>
               <li><a href="account_settings.php">Account Settings</a></li>
               <li><a href="logout.php">Log Out</a></li>';
           }
           else
           {
-              echo'<nav class="main-nav">
+              echo' <nav class="main-nav">
               <ul class="unstyled-list">
+                <li><a href="index.php">Sign up/Log in</a></li>
                 <li><a href="">Blog</a></li>';
           }
           ?>
