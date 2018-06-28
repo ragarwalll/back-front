@@ -114,9 +114,123 @@ if (isset($_POST['addasfriend']))
 <img src=<?php echo $profilepic; ?> height="200" width="200 "  />
 <!--Add as Friend-->
 <form action="<?php echo $user; ?>" method="POST">
-<?php echo $error_send; ?>
-<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />
-<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>
+<?php
+
+$friendarray="";
+$countfriend="";
+$friendarray12="";
+$friend_query=mysqli_query($db, "SELECT friend_array FROM users WHERE username='$user'" );
+$friendrow=mysqli_fetch_assoc($friend_query);
+$friendarray=$friendrow['friend_array'];
+if($friendarray!="")
+{
+  $friendarray=explode(",",$friendarray);
+  $countfriend=count($friendarray);
+  $friendarray12= array_slice($friendarray,0,12);
+
+$i=0;
+if($username!=$user)
+{
+  if(in_array($username,$friendarray))
+  {
+    $addasfriend='<input type="submit" name="removefriend" class="btnn btn--secondary " value="Remove Friend" />';
+    $sendmessage='<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>';
+
+  }
+  else
+  {
+    $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
+    $sendmessage='<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>';
+  }
+}
+else
+{
+    $addasfriend="";
+    $sendmessage="";
+}
+
+ ?>
+<?php
+}
+else
+{
+  if($username!=$user)
+  {
+    $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
+    $sendmessage='<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>';
+  }
+  else
+  {
+      $addasfriend="";
+      $sendmessage="";
+  }
+}
+
+ ?>
+
+ <?php
+ if(@$_POST['removefriend'])
+ {
+   $already_friends=mysqli_query($db,"SELECT friend_array FROM users WHERE username='$username'");
+   $already_friends_row=mysqli_fetch_assoc($already_friends);
+   $already_friends_array=$already_friends_row['friend_array'];
+   //echo "$already_friends_array";
+   $already_friends_explode=explode(",",$already_friends_array);
+   $already_friends_count=count($already_friends_explode);
+   $comma=",".$username;
+   $comma2=$username.",";
+
+   $already_friends_profile=mysqli_query($db,"SELECT friend_array FROM users WHERE username='$user'");
+   $already_friends_row_profile=mysqli_fetch_assoc($already_friends_profile);
+   $already_friends_array_profile=$already_friends_row_profile['friend_array'];
+   //echo "$already_friends_array";
+   $already_friends_explode_profile=explode(",",$already_friends_array_profile);
+   $already_friends_count_profile=count($already_friends_explode_profile);
+   $comma_profile=",".$user;
+   $comma2_profile=$user.",";
+   //Editing logged in user database
+   if(strstr($already_friends_array,$comma_profile))
+   {
+     $friend1=str_replace("$comma_profile","",$already_friends_array);
+   }
+   elseif(strstr($already_friends_array,$comma2_profile))
+   {
+     $friend1=str_replace("$comma2_profile","",$already_friends_array);
+   }
+   elseif(strstr($already_friends_array,$user))
+   {
+     $friend1=str_replace("$user","",$already_friends_array);
+   }
+   //editing current profile user database
+   if(strstr($already_friends_array_profile,$comma))
+   {
+     $friend2=str_replace("$comma","",$already_friends_array_profile);
+   }
+   elseif(strstr($already_friends_array_profile,$comma2))
+   {
+     $friend2=str_replace("$comma2","",$already_friends_array_profile);
+   }
+   elseif(strstr($already_friends_array_profile,$username))
+   {
+     $friend2=str_replace("$username","",$already_friends_array_profile);
+   }
+
+   $removefriend_query=mysqli_query($db, "UPDATE users SET friend_array='$friend1' WHERE username='$username'");
+   $removefriend_query_profile=mysqli_query($db, "UPDATE users SET friend_array='$friend2' WHERE username='$user'");
+
+   echo "Friend Removed <br />";
+   header("Location: $user");
+ }
+ else
+ {
+
+ }
+
+ ?>
+
+<?php echo $error_send; echo $addasfriend; ?>
+<?php echo $sendmessage;?>
+
 </form>
   <div class="textHeader"><?php echo $firstname?>'s Profile</div>
   <div class="profileLeftSideContent">
@@ -129,13 +243,30 @@ if (isset($_POST['addasfriend']))
   </div>
   <div class="textHeader"><?php echo $firstname?>'s Friends</div>
   <div class="profileLeftSideContent">
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
-    <img src='#' height="50" width="40"/>&nbsp;&nbsp;
+  <?php
+  if($countfriend !=0)
+  {
+    foreach ($friendarray12 as $key => $value)
+    {
+      $i++;
+      $getfriend=mysqli_query($db,"SELECT * FROM users WHERE username='$value' LIMIT 1");
+      $getfriendrow=mysqli_fetch_assoc($getfriend);
+      $friendusername=$getfriendrow['username'];
+      $friendprofilepic=$getfriendrow['profile_pic'];
+      $friendsfirstname=$getfriendrow['first_name'];
+      if($friendprofilepic=="")
+      {
+        echo "<a href='$friendusername'><img src='img/default_dp.jpg' alt=\"$friendsfirstname's Profile\" title=\"$friendsfirstname's Profile\" height='50' width='50' style='padding-right: 6px;'></a>";
+      }
+      else
+      {
+        echo "<a href='$friendusername'><img src='userdata/profile_pics/$friendprofilepic' alt=\"$friendsfirstname's Profile\" title=\"$friendsfirstname's Profile\" height='50' width='50' style='padding-right: 6px;'></a>";
+      }
+    }
+  }
+  else
+  {
+    echo $user." has no friends";
+  }
+  ?>
   </div>
