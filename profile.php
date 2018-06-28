@@ -86,8 +86,11 @@ else
     $profilepic="userdata/profile_pics/".$profilepic;
   }
 }
- ?>
- <?php
+ //Messaging
+ if(isset($_POST['sendmsg']))
+ {
+   header("Location: send_msg.php?u=$user");
+ }
 //Add as Friend
 $error_send="";
 if (isset($_POST['addasfriend']))
@@ -134,13 +137,13 @@ if($username!=$user)
   if(in_array($username,$friendarray))
   {
     $addasfriend='<input type="submit" name="removefriend" class="btnn btn--secondary " value="Remove Friend" />';
-    $sendmessage='<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>';
+    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary ind" value="Message" width="30" class="icon"/>';
 
   }
   else
   {
     $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
-    $sendmessage='<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>';
+    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary ind" value="Message" width="30" class="icon"/>';
   }
 }
 else
@@ -157,7 +160,7 @@ else
   if($username!=$user)
   {
     $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
-    $sendmessage='<input type="image" name="sendmsg" src="./img/message.png" value="" width="30" class="icon"/>';
+    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary ind" value="Message" width="30" class="icon"/>';
   }
   else
   {

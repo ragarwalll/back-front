@@ -1,3 +1,5 @@
 RewriteEngine On
 RewriteRule ^([a-zA-Z0-9_-]+)$ profile.php?u=$1
 RewriteRule ^([a-zA-Z0-9_-]+)/$ profile.php?u=$1
+RewriteRule ^([a-zA-Z0-9_-]+)$ send_msg.php?u=$2
+RewriteRule ^([a-zA-Z0-9_-]+)/$ send_msg.php?u=$2
