@@ -9,6 +9,66 @@ else
     die("You must be logged in you view this page");
 }
   ?>
+
+<?php
+if(isset($_FILES['profilepic']))
+{
+  if(((@$_FILES["profilepic"]["type"]=="image/jpeg") || (@$_FILES["profilepic"]["type"]=="image/png") || (@$_FILES["profilepic"] ["type"]=="image/gif")) && (@$_FILES["profilepic"] ["size"]<1048576))//1MB
+  {
+    $chars= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ1234567890";
+    $random= substr(str_shuffle($chars), 0,15);
+    mkdir("userdata/profile_pics/$random");
+
+    if (!file_exists("userdata/profile_pics/$random/" .@$_FILES["profilepic"]["name"]))
+    {
+      move_uploaded_file(@$_FILES["profilepic"]["tmp_name"], "userdata/profile_pics/$random/".$_FILES['profilepic']['name']);
+      //echo "Photo stored as : " .@$_FILES["profilepic"]["name"];
+      $profilepicname= @$_FILES['profilepic']['name'];
+      $pic_query=mysqli_query($db, "UPDATE users SET profile_pic='$random/$profilepicname' WHERE username='$username'");
+      header("Location: account_settings.php");
+    }
+  }
+  else
+  {
+    echo @$_Files["profilepic"]["name"]." already exists.";
+  }
+}
+else
+{
+  echo "";
+}
+
+
+$get_pic=mysqli_query($db, "SELECT profile_pic FROM users WHERE username='$username'");
+$get_rows=mysqli_fetch_assoc($get_pic);
+$profilepic=$get_rows['profile_pic'];
+if($profilepic=="")
+{
+  $profilepic="img/default_dp.jpg";
+}
+else
+{
+  if(!file_exists("userdata/profile_pics/".$profilepic))
+  {
+    $profilepic="img/default_dp.jpg";
+  }
+  else
+  {
+    $profilepic="userdata/profile_pics/".$profilepic;
+  }
+}
+ ?>
+
+<h2 >Edit you account settings</h2><hr />
+<form action="" method="POST" enctype="multipart/form-data">
+  <div class="toggle3"><h4>Upload Your Profile Photo</h4></div>
+  <div class="inside3">
+    <img src="<?php echo $profilepic; ?>" width="70">
+    <input type="file" name="profilepic" /><br /><br />
+    <input type="submit" name="uploadpic" class="btn btn--primary" value="Upload" /><br /><br />
+  </div>
+</form>
+<!-- Trigger/Open The Modal -->
 <?php
   $senddata = @$_POST['change_password'];
   $old_password=md5(strip_tags(@$_POST['oldpassword']));
@@ -52,9 +112,6 @@ else
     echo  "";
   }
 ?>
-
-<h2 >Edit you account settings</h2><hr />
-<!-- Trigger/Open The Modal -->
 <form action="account_settings.php" method="POST">
 
   <div class="toggle"><h4>Change your password</h4></div>
@@ -62,7 +119,7 @@ else
     Your Old Password:  <input type="password" name="oldpassword" id="oldpassword" size="40" placeholder="Enter your old password here"><br /><br />
     Your New Password: <input type="password" name="newpassword" id="newpassword" size="40" placeholder="Enter your new password here"><br /><br />
     Retype Your Password: <input type="password" name="newpassword2" id="newpassword2" size="40" placeholder="Retype your password here"><br /><br />
-    <input type="submit" name="change_password" id="change_password" value="Update Password"><br /><br />
+    <input type="submit" name="change_password" id="change_password" class="btn btn--primary" value="Update Password"><br /><br />
   </div>
 
 </form>
@@ -111,7 +168,7 @@ else
     First Name:  <input type="text" name="fname" id="fname" size="40" value="<?php echo $i_firstname; ?>"><br /><br />
     Last Name: <input type="text" name="lname" id="lname" size="40" value="<?php echo $i_lastname; ?>"><br /><br />
     About You: <textarea name="aboutyou" id="aboutyou" rows="7" cols="60"><?php echo $i_bio; ?></textarea><br /><br />
-    <input type="submit" name="user_info" id="user_info" value="Update Information"><br /><br />
+    <input type="submit" name="user_info" id="user_info" class="btn btn--primary" value="Update Information"><br /><br />
   </div>
 
 </form>

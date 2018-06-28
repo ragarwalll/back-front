@@ -1,0 +1,32 @@
+.btn
+  display: inline-block
+  padding: .50em 1em
+  text-transform: uppercase
+  text-decoration: none
+
+.btnn
+  display: inline-block
+  padding: .50em 1em
+  text-transform: uppercase
+  text-decoration: none
+  margin-bottom: 0.5em
+
+.btn--primary
+  background: $accent
+  color: $text-inverse
+  border: 2px solid $accent
+  &:hover,
+  &:focus
+    background:  darken($accent, 15%)
+
+.btn--secondary
+  border: 2px solid $text-main
+  background: $text-inverse
+  color: $text-main
+  &:hover,
+  &:focus
+    background: $text-main
+    color: $text-inverse
+.icon
+  position: absolute
+  margin-left: 5px

@@ -7,6 +7,7 @@ if(!isset($_SESSION["user_login"]))
 else
 {
   $username= $_SESSION["user_login"];
+  
 }
 ?>
 <!doctype html>
@@ -30,6 +31,9 @@ else
         <?php
         if($username)
         {
+          $get_friend_check=mysqli_query($db,"SELECT count(user_from) FROM friend_requests WHERE user_to='$username'");
+          $get_friend_row=mysqli_fetch_assoc($get_friend_check);
+          $friend_array=$get_friend_row['count(user_from)'];
           echo '
           <div class="search_box">
             <form action="search.php" method="GET" id="search">
@@ -40,6 +44,7 @@ else
             <ul class="unstyled-list">
             <li><a href="home.php">Home</a></li>
               <li><a href="'.$username.'">Profile</a></li>
+              <li><a href="friend_requests.php">Requests('.$friend_array.')</a></li>
               <li><a href="account_settings.php">Account Settings</a></li>
               <li><a href="logout.php">Log Out</a></li>';
           }

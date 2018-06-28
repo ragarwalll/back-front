@@ -49,7 +49,7 @@ if($reg)
                   {
                     $pswd=md5($pswd);
                     $pswd=md5($pswd2);
-                    $query=mysqli_query($db,"INSERT INTO users VALUES('','$un','$fn','$ln','$em','$pswd','$d','0')");
+                    $query=mysqli_query($db,"INSERT INTO users VALUES('','$un','$fn','$ln','$em','$pswd','$d','0','','','')");
                     die("<h2>Welcome to El Arte Connect</h2>Login in to get started");
                   }
                 }
