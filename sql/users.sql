@@ -34,6 +34,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(32) NOT NULL,
   `sign_up_date` date NOT NULL,
-  `activated` enum('0','1') NOT NULL
+  `activated` enum('0','1') NOT NULL,
+  `bio` text,
+  `profile_pic` text,
+  `friend_array` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
