@@ -1,5 +1,13 @@
 <?php
 include ( "./inc/header.inc.php");
+if($username)
+{
+
+}
+else
+{
+    die("You must be logged in you view this page");
+}
 if (isset($_GET['u']))
 {
   $user= mysqli_real_escape_string($db,$_GET['u']);
@@ -42,7 +50,7 @@ if (isset($_GET['u']))
         <form action='send_msg.php?u=$user' method='POST'>
           <h2>Send a Message:</h2>
           <textarea cols='40' rows='5' name='msg_body'>Enter your message....</textarea><p />
-          <input type='submit' class='btn btn--secondary' name='submit' value'Send Message'>
+          <input type='submit' class='btn btn--secondary' name='submit' value='Send Message'>
         </form>
         ";
       }
