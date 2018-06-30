@@ -27,7 +27,7 @@ if($read_row>0)
     {
         $msg_body=$msg_body;
     }
-    echo "<a href='$user_from'>$fname $lname</a>&nbsp;<a id='displayText' href='javascript: toggle();'>$msg_body</a><hr />";
+    echo "<a href='$user_from'>$fname $lname</a>&nbsp;<a id='displayText  ' href='javascript: toggle();'>$msg_body</a><hr />";
     }
   }
 }

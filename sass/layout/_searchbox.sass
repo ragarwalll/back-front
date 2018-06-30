@@ -2,7 +2,32 @@
   background: linear-gradient(to right, #089ca4, #0cb19e)
   position: absolute
   top: 25px
-  margin-left: 200px
+  margin-left: 180px
+  @media( max-width: 685px)
+    background: linear-gradient(to right, #048ca8, #16da93)
+    display: none
+    top: 100%
+    left: 0
+    margin-left: 0
+    overflow: hidden
+    transition: all ease 250ms
+    &.is-search
+      display: block
+      transition: all ease 250ms
+
+.icon_color
+  color: #fff
+.search-icon
+  position: absolute
+  top: 1.8em
+  right: 5.3em
+  cursor: pointer
+  display: block
+  &.hide
+    display: none
+  @media( min-width: 685px)
+    display: none
+
 
 #search input[type="text"]
   background: url(../img/search_light.png) no-repeat 10px 6px
@@ -19,6 +44,9 @@
   -moz-transition: all 0.7s ease 0s
   -o-transition: all 0.7s ease 0s
   transition: all 0.7s ease 0s
+  @media( max-width: 685px)
+    width: 100vw
+    overflow: hidden
 
 #search input[type="text"]:focus
   background: url(../img/search_dark.png) no-repeat 10px 6px #fcfcfc
@@ -28,6 +56,9 @@
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset
+  @media( max-width: 685px)
+    width: 100vw
+    overflow: hidden
 
 ::placeholder
   color: #999999
