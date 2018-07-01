@@ -839,8 +839,29 @@ input[type="password"]:hover, input[type="password"]:focus {
   border: 1px solid #048ca8;
 }
 
-.box {
+.box1 {
   width: 40%;
+  vertical-align: top;
+}
+
+@media (max-width: 900px) {
+  .box1 {
+    display: block;
+    width: 100%;
+    margin: auto 0;
+  }
+}
+
+.box2 {
+  width: 40%;
+}
+
+@media (max-width: 900px) {
+  .box2 {
+    display: block;
+    width: 100%;
+    padding-top: 2.5em;
+  }
 }
 
 .grid {

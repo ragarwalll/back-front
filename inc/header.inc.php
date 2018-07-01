@@ -63,14 +63,22 @@ else
           }
           ?>
         </nav>
-
         <div class="nav-toggle">
           <div class="hamburger"></div>
         </div>
       </div>
-      <div class="search-icon">
-        <i class="fa fa-search icon_color" aria-hidden="true"></i>
-      </div>
+      <?php
+      if($username)
+      {
+        echo '
+        <div class="search-icon">
+          <i class="fa fa-search icon_color" aria-hidden="true"></i>
+        </div>';
+      }
+      else
+      {
+      }
+      ?>
     </header>
     <div id="wrapper">
 <br />
