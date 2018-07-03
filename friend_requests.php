@@ -103,3 +103,4 @@ if (isset($_POST['ignorerequest'.$user_from]))
   }
 }
  ?>
+ <?php include ( "./inc/footer.inc.php" );?>

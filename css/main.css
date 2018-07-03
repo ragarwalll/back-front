@@ -737,7 +737,8 @@ h2 {
   flex-basis: auto;
   align-items: center;
   display: flex;
-  padding-right: 2em;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 
 .main-nav a:hover {
@@ -818,6 +819,13 @@ input[type="text"] {
   margin-bottom: 3px;
   margin-top: 3px;
   outline: none;
+  transition: all ease-in-out 500ms;
+}
+
+@media (max-width: 430px) {
+  input[type="text"] {
+    width: 200px;
+  }
 }
 
 input[type="text"]:hover, input[type="text"]:focus {
@@ -833,6 +841,13 @@ input[type="password"] {
   margin-bottom: 3px;
   margin-top: 3px;
   outline: none;
+  transition: all ease-in-out 500ms;
+}
+
+@media (max-width: 430px) {
+  input[type="password"] {
+    width: 200px;
+  }
 }
 
 input[type="password"]:hover, input[type="password"]:focus {
@@ -1129,4 +1144,46 @@ h4:hover, h4:focus {
   position: absolute;
   margin-left: 5px;
   margin-top: 3px;
+}
+
+#toggleText {
+  float: right;
+}
+
+.message_left {
+  left: 0;
+  width: 200px;
+}
+
+.message_right {
+  right: 0;
+  max-width: 800px;
+  text-align: right;
+}
+
+#displayText {
+  text-decoration: none;
+  color: #048ca8;
+}
+
+#displayText:hover {
+  color: #16db93;
+}
+
+#name {
+  color: #16db93;
+}
+
+.chat_it {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  text-align: center;
+}
+
+#send_message {
+  position: absolute;
+  margin-left: 1em;
 }

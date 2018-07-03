@@ -5,7 +5,7 @@ if($username)
  ?>
 <?php include ( "./inc/register.inc.php" );  ?>
 <?php include ( "./inc/login.inc.php" );  ?>
-    <br></br>
+      <br></br>
         <table align="center">
           <tr>
             <td class="box1">

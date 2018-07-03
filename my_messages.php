@@ -14,20 +14,26 @@ if($read_row>0)
     $data=$get_message_row['date'];
     $opened=$get_message_row['opened'];
     $getDetails=mysqli_query($db,"SELECT first_name,last_name FROM users WHERE username='$user_from'");
+    $i=0;
     while($get_details=mysqli_fetch_assoc($getDetails))
     {
       $fname=$get_details['first_name'];
       $lname=$get_details['last_name'];
 
-    if(strlen($msg_body)>100)
-    {
-      $msg_body=substr($msg_body,0,100)."....";
-    }
-    else
-    {
-        $msg_body=$msg_body;
-    }
-    echo "<a href='$user_from'>$fname $lname</a>&nbsp;<a id='displayText  ' href='javascript: toggle();'>$msg_body</a><hr />";
+      if(strlen($msg_body)>100)
+      {
+        $msg_body=substr($msg_body,0,100)."....";
+      }
+      else
+      {
+          $msg_body=$msg_body;
+      }
+
+        echo "<a id='name' href='$user_from'>$fname $lname:</a><br>
+        <a id='displayText' href='chat.php?u=$user_from'>$msg_body</a><hr />
+        ";
+
+
     }
   }
 }
@@ -64,7 +70,9 @@ if($read_row>0)
     {
         $msg_body=$msg_body;
     }
-    echo "<a href='$user_from'>$fname $lname</a>&nbsp;".$msg_body."<hr />";
+    echo "<a id='name' href='$user_from'>$fname $lname:</a>&nbsp<br>
+    <a id='displayText' href='chat.php?u=$user_from'>$msg_body</a><hr />
+    ";
     }
   }
 }
@@ -73,3 +81,4 @@ else
     echo "<p />You haven't read any messages yet";
 }
 ?>
+<?php include ( "./inc/footer.inc.php" );?>

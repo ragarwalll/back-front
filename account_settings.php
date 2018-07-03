@@ -178,3 +178,4 @@ else
       crossorigin="anonymous"></script>
 
     <script src="js/account_settings.js"></script>
+    <?php include ( "./inc/footer.inc.php" );?>

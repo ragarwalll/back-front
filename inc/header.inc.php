@@ -56,17 +56,21 @@ else
           }
           else
           {
-              echo' <nav class="main-nav">
+
+            echo'
+            <nav class="main-nav">
               <ul class="unstyled-list">
-                <li><a href="index.php">Sign up/Log in</a></li>
-                <li><a href="">Blog</a></li>';
+              <li><a href="index.php">Sign up/Log in</a></li>
+              <li><a href="">Blog</a></li>
+              ';
           }
           ?>
-        </nav>
-        <div class="nav-toggle">
-          <div class="hamburger"></div>
+
+          </nav>
+          <div class="nav-toggle">
+            <div class="hamburger"></div>
+          </div>
         </div>
-      </div>
       <?php
       if($username)
       {
@@ -79,15 +83,15 @@ else
       {
       }
       ?>
+
     </header>
     <div id="wrapper">
-<br />
-<br />
-<script
-      src="https://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous"></script>
-
-<script src="js/search_icon.js"></script>
-<script src="js/nav.js"></script>
-<script src="https://use.fontawesome.com/97974f9c24.js"></script>
+      <br />
+      <br />
+      <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+      <script src="js/search_icon.js"></script>
+      <script src="js/nav.js"></script>
+      <script src="https://use.fontawesome.com/97974f9c24.js"></script>

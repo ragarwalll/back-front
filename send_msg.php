@@ -19,7 +19,7 @@ if (isset($_GET['u']))
       $get=mysqli_fetch_assoc($check);
       $user=$get['username'];
       //echo $user;
-
+      
       if($username!=$user)
       {
         if(isset($_POST['submit']))
@@ -62,3 +62,4 @@ if (isset($_GET['u']))
   }
 }
 ?>
+<?php include ( "./inc/footer.inc.php" );?>

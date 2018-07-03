@@ -7,6 +7,9 @@ input[type="text"]
   margin-bottom: 3px
   margin-top: 3px
   outline: none
+  transition: all ease-in-out 500ms
+  @media (max-width: 430px)
+    width: 200px
 
 input[type="text"]:hover,input[type="text"]:focus
   border: 1px solid #048ca8
@@ -20,8 +23,15 @@ input[type="password"]
   margin-bottom: 3px
   margin-top: 3px
   outline: none
+  transition: all ease-in-out 500ms
+  @media (max-width: 430px)
+    width: 200px
+
+
 input[type="password"]:hover,input[type="password"]:focus
   border: 1px solid #048ca8
+
+
 .box1
   width: 40%
   vertical-align: top

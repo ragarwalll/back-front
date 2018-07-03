@@ -37,7 +37,7 @@ else {
 
 <div class="postForm"><br />
   <form action="<?php echo $user; ?>" method="POST">
-    <textarea id="post" name="post" rows="6" cols="58"></textarea>
+    <textarea id="post" name= "post" rows="6" cols="58"></textarea>
     <input type="image" src="./img/post.png"  name="send" width="50" style="float: right; padding-right: 10px; padding-top: 4.5em;" />
   </form>
 </div>
@@ -89,7 +89,7 @@ else
  //Messaging
  if(isset($_POST['sendmsg']))
  {
-   header("Location: send_msg.php?u=$user");
+   header("Location: chat.php?u=$user");
  }
 //Add as Friend
 $error_send="";
@@ -273,3 +273,4 @@ else
   }
   ?>
   </div>
+  <?php include ( "./inc/footer.inc.php" );?>
