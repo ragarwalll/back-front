@@ -18,8 +18,24 @@ else
     initial scale=1">
     <title>El Arte</title>
     <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/nav.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-    <script src="js/reload.js" type="text/javascript"></script>
+    <!--<script>
+    $(document).ready(function(){
+      var myVar = setInterval(myTimer, 1000);
+      function myTimer() {
+        //var x = document.getElementById("screen").innerHTML;
+          $('#screen').load('<?php
+          $get_friend_messages=mysqli_query($db,"SELECT DISTINCT user_from FROM pvt_messages WHERE user_to='$username' AND opened='no'");
+          $friend_array_messages=mysqli_num_rows($get_friend_messages);
+          echo "$friend_array_messages";
+          ?>').fadeIn("slow");
+        //$('#message_reload').load('messages_left.php').fadeIn("slow");
+        //var url = '../messages.php';
+        //document.getElementById("screen").innerHTML = url;
+      }
+    });
+  </script>-->
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -35,9 +51,9 @@ else
           $get_friend_check=mysqli_query($db,"SELECT count(user_from) FROM friend_requests WHERE user_to='$username'");
           $get_friend_row=mysqli_fetch_assoc($get_friend_check);
           $friend_array=$get_friend_row['count(user_from)'];
-          $get_friend_messages=mysqli_query($db,"SELECT count(opened) FROM pvt_messages WHERE opened='no' AND user_to='$username'");
-          $get_messages_row=mysqli_fetch_assoc($get_friend_messages);
-          $friend_array_messages=$get_messages_row['count(opened)'];
+          $get_friend_messages=mysqli_query($db,"SELECT DISTINCT user_from FROM pvt_messages WHERE user_to='$username' AND opened='no'");
+          $friend_array_messages=mysqli_num_rows($get_friend_messages);
+          //$friend_array_messages=$get_messages_row['count(opened)'];
           //<li><a href="friend_requests.php">Requests('.$friend_array.')</a></li>
 
           echo '
@@ -51,7 +67,8 @@ else
                 <li><a href="home.php">Home</a></li>
                 <li><a href="'.$username.'">Profile</a></li>
                 <li><a href="my_messages.php">Messages(<div id="screen">'.$friend_array_messages.'</div>)</a></li>
-                <li><a href="friend_requests.php">Requests('.$friend_array.')</a></li>
+                <li><a href="friend_requests.php">Requests(<div id="screen">'.$friend_array.'</div>)</a></li>
+                <li><a href="my_pokes.php">Pokes</a></li>
                 <li><a href="account_settings.php">Settings</a></li>
                 <li><a href="logout.php">Log Out</a></li>';
           }

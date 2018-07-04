@@ -30,10 +30,10 @@ if($post != "")
   $sql_command= "INSERT INTO posts VALUES('','$post','$date_added','$added_by','$user_posted_to')";
   $query= mysqli_query($db,$sql_command) or die(mysqlerror());
 }
-else {
-
+else
+{
 }
- ?>
+?>
 
 <div class="postForm"><br />
   <form action="<?php echo $user; ?>" method="POST">
@@ -42,30 +42,37 @@ else {
   </form>
 </div>
 <div class="profilePosts">
-  <?php
-    $getposts=mysqli_query($db,"SELECT * FROM posts WHERE user_posted_to='$user' ORDER BY id DESC LIMIT 10") or die(mysqlerror());
-    while ($row= mysqli_fetch_assoc($getposts))
+<?php
+
+  $getposts=mysqli_query($db,"SELECT * FROM posts WHERE user_posted_to='$user' ORDER BY id DESC LIMIT 10") or die(mysqlerror());
+  while ($row= mysqli_fetch_assoc($getposts))
+  {
+    $id=$row['id'];
+    $body=$row['body'];
+    $date_added=$row['date_added'];
+    $added_by=$row['added_by'];
+    $user_posted_to=$row['user_posted_to'];
+    $getname=mysqli_query($db,"SELECT * FROM users WHERE username='$added_by' ") or die(mysqlerror());
+    while ($get_name= mysqli_fetch_assoc($getname))
     {
-      $id=$row['id'];
-      $body=$row['body'];
-      $date_added=$row['date_added'];
-      $added_by=$row['added_by'];
-      $user_posted_to=$row['user_posted_to'];
-      $getname=mysqli_query($db,"SELECT first_name, last_name FROM users WHERE username='$added_by' ") or die(mysqlerror());
-      while ($get_name= mysqli_fetch_assoc($getname))
-      {
-        $firstname_post=$get_name['first_name'];
-        $lastname_post=$get_name['last_name'];
-      }
-      echo "
-      <div class='posted_by'>
-        <a href='$added_by'>$firstname_post $lastname_post</a>
-        <div class='datediv'>$date_added<br /></div>
-      </div><br />
-      &nbsp;&nbsp;<br />$body<br /<br /><hr />
-      ";
+      $firstname_post=$get_name['first_name'];
+      $lastname_post=$get_name['last_name'];
+      $profilepic_post=$get_name['profile_pic'];
     }
-   ?>
+    echo "
+    <div class='posted_by'>
+      <img src='userdata/profile_pics/$profilepic_post' height='40' style='border-radius: 50%;'>
+      <a href='$added_by'>$firstname_post $lastname_post</a><span>$date_added</span><br />
+
+    </div><br />
+    &nbsp;&nbsp;<br />
+    <div class='actual_post' style='overflox-x: 100px;'>
+      $body
+    </div>
+    <br /<br /><hr />
+    ";
+  }
+?>
 
 <?php
 $get_pic=mysqli_query($db, "SELECT profile_pic FROM users WHERE username='$user'");
@@ -86,11 +93,10 @@ else
     $profilepic="userdata/profile_pics/".$profilepic;
   }
 }
- //Messaging
- if(isset($_POST['sendmsg']))
- {
-   header("Location: chat.php?u=$user");
- }
+if (isset($_POST['sendmsg']))
+{
+ header("Location: chat.php?u=$user");
+}
 //Add as Friend
 $error_send="";
 if (isset($_POST['addasfriend']))
@@ -110,15 +116,11 @@ if (isset($_POST['addasfriend']))
     $error_send="Friend request send! <br />";
   }
 }
-
-
-  ?>
+?>
 </div>
 <img src=<?php echo $profilepic; ?> height="200" width="200 "  />
-<!--Add as Friend-->
 <form action="<?php echo $user; ?>" method="POST">
 <?php
-
 $friendarray="";
 $countfriend="";
 $friendarray12="";
@@ -131,41 +133,43 @@ if($friendarray!="")
   $countfriend=count($friendarray);
   $friendarray12= array_slice($friendarray,0,12);
 
-$i=0;
-if($username!=$user)
-{
-  if(in_array($username,$friendarray))
+  $i=0;
+  if($username!=$user)
   {
-    $addasfriend='<input type="submit" name="removefriend" class="btnn btn--secondary " value="Remove Friend" />';
-    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary ind" value="Message" width="30" class="icon"/>';
+    if(in_array($username,$friendarray))
+    {
+      $addasfriend='<input type="submit" name="removefriend" class="btnn btn--secondary " value="Remove Friend" />';
+      $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary msg" value="Message" />';
+      $pokefriend='<input type="submit" name="poke" class="btnn btn--primary poke" value="Poke" />';
 
+    }
+    else
+    {
+      $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
+      $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary msg" value="Message" />';
+      $pokefriend='<input type="submit" name="poke" class="btnn btn--primary poke" value="Poke" />';
+    }
   }
   else
   {
-    $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
-    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary ind" value="Message" width="30" class="icon"/>';
+      $addasfriend="";
+      $sendmessage="";
+      $pokefriend="";
   }
-}
-else
-{
-    $addasfriend="";
-    $sendmessage="";
-}
-
- ?>
-<?php
 }
 else
 {
   if($username!=$user)
   {
     $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
-    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary ind" value="Message" width="30" class="icon"/>';
+    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary msg" value="Message" />';
+    $pokefriend='<input type="submit" name="poke" class="btnn btn--primary poke" value="Poke" />';
   }
   else
   {
       $addasfriend="";
       $sendmessage="";
+      $pokefriend="";
   }
 }
 
@@ -229,10 +233,24 @@ else
 
  }
 
- ?>
+if(isset($_POST['poke']))
+{
+  $pokecheck_query=mysqli_query($db,"SELECT * FROM pokes WHERE user_from='$username' AND user_to='$user'");
+  $poke_check=mysqli_num_rows($pokecheck_query);
+  if($poke_check==0)
+  {
+    $poke_query=mysqli_query($db,"INSERT INTO pokes VALUES('','$username','$user')");
+    $error_send="$firstname has been poked!";
+  }
+  else
+  {
+      $error_send="You cannot poke twice";
+  }
+}
+?>
 
 <?php echo $error_send; echo $addasfriend; ?>
-<?php echo $sendmessage;?>
+<?php echo $sendmessage;echo $pokefriend;?>
 
 </form>
   <div class="textHeader"><?php echo $firstname?>'s Profile</div>

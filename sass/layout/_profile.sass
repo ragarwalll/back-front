@@ -43,6 +43,18 @@
     padding: 5px
     text-align: justify
 
+.newsfeed
+  background-color: #ffffff
+  border: 1px solid #F3F6F9
+  padding: 0.6em
+  transform: all ease-in-out 250ms
+  &:hover
+    background-color: #F3F6F9
+    border: 1px solid #F3F6F9
+  &.close
+    transform: all ease-in-out 250ms
+    display: none
+
 hr
   background-color: #dce5ee
   height: 1px
@@ -61,6 +73,22 @@ hr
   font-weight: $font-bold
   color: #048ca8
   text-decoration: none
+  position: absolute
+  padding-left: 0.5em
+
+.posted_by span
+  font-weight: $font-light
+  font-size: 0.8em
+  color: #000
+  padding-left: 0.7em
+
+.actual_post
+  width: 400px
+  transition: all ease-in-out 250ms
+  @media(max-width: 450px)
+    width: 300px
+  @media(max-width: 350px)
+    width: 250px
 
 .posted_by a:hover
   font-weight: 800

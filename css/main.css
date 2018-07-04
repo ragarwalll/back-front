@@ -713,7 +713,7 @@ h2 {
     flex-direction: column;
     border: none;
     text-align: center;
-    height: 97vh;
+    height: 100vh;
   }
 }
 
@@ -968,6 +968,23 @@ input[type="password"]:hover, input[type="password"]:focus {
   text-align: justify;
 }
 
+.newsfeed {
+  background-color: #ffffff;
+  border: 1px solid #F3F6F9;
+  padding: 0.6em;
+  transform: all ease-in-out 250ms;
+}
+
+.newsfeed:hover {
+  background-color: #F3F6F9;
+  border: 1px solid #F3F6F9;
+}
+
+.newsfeed.close {
+  transform: all ease-in-out 250ms;
+  display: none;
+}
+
 hr {
   background-color: #dce5ee;
   height: 1px;
@@ -989,6 +1006,32 @@ hr {
   font-weight: 700;
   color: #048ca8;
   text-decoration: none;
+  position: absolute;
+  padding-left: 0.5em;
+}
+
+.posted_by span {
+  font-weight: 300;
+  font-size: 0.8em;
+  color: #000;
+  padding-left: 0.7em;
+}
+
+.actual_post {
+  width: 400px;
+  transition: all ease-in-out 250ms;
+}
+
+@media (max-width: 450px) {
+  .actual_post {
+    width: 300px;
+  }
+}
+
+@media (max-width: 350px) {
+  .actual_post {
+    width: 250px;
+  }
 }
 
 .posted_by a:hover {
@@ -1115,8 +1158,8 @@ h4:hover, h4:focus {
   margin-bottom: 0.5em;
 }
 
-.ind {
-  margin-left: 1.3em;
+.msg, .poke {
+  font-size: 0.85em;
 }
 
 .btn--primary {
@@ -1180,10 +1223,20 @@ h4:hover, h4:focus {
   bottom: 0;
   width: 100%;
   background-color: white;
+  text-align: justify;
   text-align: center;
+}
+
+.chat_it.close {
+  display: none;
 }
 
 #send_message {
   position: absolute;
   margin-left: 1em;
+}
+
+#message_area {
+  margin-left: 0.5em;
+  margin-left: -10.5em;
 }

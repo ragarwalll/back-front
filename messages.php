@@ -10,8 +10,7 @@ else
   $username= $_SESSION["user_login"];
 
 }
-$get_friend_messages=mysqli_query($db,"SELECT count(opened) FROM pvt_messages WHERE opened='no' AND user_to='$username'");
-$get_messages_row=mysqli_fetch_assoc($get_friend_messages);
-$friend_array_messages=$get_messages_row['count(opened)'];
+$get_friend_messages=mysqli_query($db,"SELECT DISTINCT user_from FROM pvt_messages WHERE user_to='$username' AND opened='no'");
+$friend_array_messages=mysqli_num_rows($get_friend_messages);
 echo "$friend_array_messages";
 ?>

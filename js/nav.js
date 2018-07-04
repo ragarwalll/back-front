@@ -4,6 +4,8 @@ $(document).ready(function() {
     $('.main-nav').toggleClass('is-open')
     $('.hamburger').toggleClass('is-open')
     $('.search-icon').toggleClass('hide')
+    $('.chat_it').toggleClass('close')
+    $('.newsfeed').toggleClass('close')
 
 
   })

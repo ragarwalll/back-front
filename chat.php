@@ -79,13 +79,13 @@ if (isset($_GET['u']))
           }
         }
         echo "
-        <div id='bottom'><br><br><br></div>
-        <div class='chat_it'>
-          <form action='chat.php?u=$user' method='POST'>
-            <textarea cols='90' rows='2' name='msg_body'>Enter your message....</textarea>
-            <input id='send_message' type='submit' class='btn btn--secondary' name='submit' value='Send Message'>
-          </form>
-        <div>
+        <br><br><br></div>
+          <div class='chat_it'>
+            <form action='chat.php?u=$user' method='POST'>
+              <textarea id='message_area' cols='30' rows='2' name='msg_body' style='width:50%'>Enter your message....</textarea>
+              <input id='send_message' type='submit' class='btn btn--secondary' name='submit' value='Send Message'>
+            </form>
+          <div>
         ";
       }
       else
