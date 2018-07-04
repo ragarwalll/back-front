@@ -18,7 +18,8 @@ else
     initial scale=1">
     <title>El Arte</title>
     <script src="js/main.js" type="text/javascript"></script>
-
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="js/reload.js" type="text/javascript"></script>
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -40,19 +41,19 @@ else
           //<li><a href="friend_requests.php">Requests('.$friend_array.')</a></li>
 
           echo '
-          <div class="search_box">
-            <form action="search.php" method="GET" id="search">
-              <input type="text" name="q" size="60" placeholder="Find friends">
-            </form>
-          </div>
-          <nav class="main-nav">
-            <ul class="unstyled-list">
-              <li><a href="home.php">Home</a></li>
-              <li><a href="'.$username.'">Profile</a></li>
-              <li><a href="my_messages.php">Messages('.$friend_array_messages.')</a></li>
-              <li><a href="friend_requests.php">Requests('.$friend_array.')</a></li>
-              <li><a href="account_settings.php">Settings</a></li>
-              <li><a href="logout.php">Log Out</a></li>';
+            <div class="search_box">
+              <form action="search.php" method="GET" id="search">
+                <input type="text" name="q" size="60" placeholder="Find friends">
+              </form>
+            </div>
+            <nav class="main-nav">
+              <ul class="unstyled-list">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="'.$username.'">Profile</a></li>
+                <li><a href="my_messages.php">Messages(<div id="screen">'.$friend_array_messages.'</div>)</a></li>
+                <li><a href="friend_requests.php">Requests('.$friend_array.')</a></li>
+                <li><a href="account_settings.php">Settings</a></li>
+                <li><a href="logout.php">Log Out</a></li>';
           }
           else
           {

@@ -68,8 +68,10 @@ if (isset($_GET['u']))
           else//if($get_messages_user_from==$user && $get_messages_user_to==$username)
           {
             echo "
-            <div class='message_left'>
-              $get_messages<h6>$get_messages_date</h6>
+            <div id='message_reload'>
+              <div class='message_left'>
+                $get_messages<h6>$get_messages_date</h6>
+              </div>
             </div>
             ";
             echo "<hr />";
