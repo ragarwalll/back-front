@@ -37,7 +37,11 @@ while ($row= mysqli_fetch_assoc($getposts))
     &nbsp;&nbsp;<br />
     <div class='actual_post' style='overflox-x: 100px;'>
       $body
-    </div><br />
+    </div><hr />
+    <div class='postspublic'>
+    
+    </div>
+    <br />
   </div>
   ";
 include ("css/extra/post.css");
