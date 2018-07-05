@@ -1,0 +1,43 @@
+<style>
+.newsfeedoptions<?php echo $id;?>{
+  display: block;
+  padding: 1em;
+  float: right;
+  right: 1em;
+  top: 1.5em;
+  cursor: pointer;
+}
+
+.options<?php echo $id;?>, .options<?php echo $id;?>::before, .options<?php echo $id;?>::after {
+  content: '';
+  display: block;
+  width: 4px;
+  border-radius: 50%;
+  height: 4px;
+  background: #089ca4;
+  transition: all ease-in-out 250ms;
+}
+
+.options<?php echo $id;?>::before {
+  transform: translateY(-7px);
+}
+
+.options<?php echo $id;?>::after {
+  transform: translateY(3px);
+}
+
+.options<?php echo $id;?>.is-open {
+  transform: scale(1.5);
+  background: #16db93;
+}
+
+.options<?php echo $id;?>.is-open::before {
+  transform: translateY(0.2px);
+  background: #16db93;
+}
+
+.options<?php echo $id;?>.is-open::after {
+  transform: translateY(-4px);
+  background: #16db93;
+}
+</style>

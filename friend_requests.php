@@ -95,8 +95,8 @@ if (isset($_POST['ignorerequest'.$user_from]))
 
 ?>
 <form action="friend_requests.php" method="POST">
-  <input type="submit" name=acceptrequest<?php echo $user_from; ?> value="Accept" style="">
-  <input type="submit" name=ignorerequest<?php echo $user_from; ?> value="Ignore" style="">
+  <input type="submit" class="btnn btn--secondary " name=acceptrequest<?php echo $user_from; ?> value="Accept" style="">
+  <input type="submit" class="btnn btn--primary" name=ignorerequest<?php echo $user_from; ?> value="Ignore" style="">
 </form>
 
 <?php

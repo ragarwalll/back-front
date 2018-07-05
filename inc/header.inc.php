@@ -18,24 +18,8 @@ else
     initial scale=1">
     <title>El Arte</title>
     <script src="js/main.js" type="text/javascript"></script>
-    <script src="js/nav.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-    <!--<script>
-    $(document).ready(function(){
-      var myVar = setInterval(myTimer, 1000);
-      function myTimer() {
-        //var x = document.getElementById("screen").innerHTML;
-          $('#screen').load('<?php
-          $get_friend_messages=mysqli_query($db,"SELECT DISTINCT user_from FROM pvt_messages WHERE user_to='$username' AND opened='no'");
-          $friend_array_messages=mysqli_num_rows($get_friend_messages);
-          echo "$friend_array_messages";
-          ?>').fadeIn("slow");
-        //$('#message_reload').load('messages_left.php').fadeIn("slow");
-        //var url = '../messages.php';
-        //document.getElementById("screen").innerHTML = url;
-      }
-    });
-  </script>-->
+    <!--<script src="js/reload_message.js" type="text/javascript"></script>-->
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>

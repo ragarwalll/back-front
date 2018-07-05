@@ -1,5 +1,5 @@
-<?php include ( "./inc/header.inc.php" );  ?>
-<?php
+<?php include ( "./inc/header.inc.php" );
+ob_start();
 if (isset($_GET['u']))
 {
   $user= mysqli_real_escape_string($db,$_GET['u']);
@@ -30,11 +30,26 @@ if($post != "")
   $sql_command= "INSERT INTO posts VALUES('','$post','$date_added','$added_by','$user_posted_to')";
   $query= mysqli_query($db,$sql_command) or die(mysqlerror());
 }
+//Check whether the user has uploaded a profile pic or not
+$get_pic=mysqli_query($db, "SELECT profile_pic FROM users WHERE username='$user'");
+$get_rows=mysqli_fetch_assoc($get_pic);
+$profilepic=$get_rows['profile_pic'];
+if($profilepic=="")
+{
+  $profilepic="img/default_dp.jpg";
+}
 else
 {
+  if(!file_exists("userdata/profile_pics/".$profilepic))
+  {
+    $profilepic="img/default_dp.jpg";
+  }
+  else
+  {
+    $profilepic="userdata/profile_pics/".$profilepic;
+  }
 }
 ?>
-
 <div class="postForm"><br />
   <form action="<?php echo $user; ?>" method="POST">
     <textarea id="post" name= "post" rows="6" cols="58"></textarea>
@@ -42,8 +57,8 @@ else
   </form>
 </div>
 <div class="profilePosts">
-<?php
-
+  <?php
+  //All Mine posts on wall
   $getposts=mysqli_query($db,"SELECT * FROM posts WHERE user_posted_to='$user' ORDER BY id DESC LIMIT 10") or die(mysqlerror());
   while ($row= mysqli_fetch_assoc($getposts))
   {
@@ -63,62 +78,39 @@ else
     <div class='posted_by'>
       <img src='userdata/profile_pics/$profilepic_post' height='40' style='border-radius: 50%;'>
       <a href='$added_by'>$firstname_post $lastname_post</a><span>$date_added</span><br />
-
-    </div><br />
-    &nbsp;&nbsp;<br />
-    <div class='actual_post' style='overflox-x: 100px;'>
-      $body
     </div>
-    <br /<br /><hr />
-    ";
+    <br /><br />
+    <div class='actual_post' style='overflox-x: 100px;'>$body</div><br /><hr />";
   }
-?>
-
-<?php
-$get_pic=mysqli_query($db, "SELECT profile_pic FROM users WHERE username='$user'");
-$get_rows=mysqli_fetch_assoc($get_pic);
-$profilepic=$get_rows['profile_pic'];
-if($profilepic=="")
-{
-  $profilepic="img/default_dp.jpg";
-}
-else
-{
-  if(!file_exists("userdata/profile_pics/".$profilepic))
+  //Messaging
+  $error_send="";
+  if (isset($_POST['sendmsg1'])) {
+  	 header("Location: chat.php?u=$user");
+  	}
+  //Add as Friend
+  if (isset($_POST['addasfriend']))
   {
-    $profilepic="img/default_dp.jpg";
+    $friend_request=$_POST['addasfriend'];
+    $user_to=$user;
+    $user_from=$username;
+
+    if($user_to==$user_from)
+    {
+      $error_send= "Hi lonely, bt you can't send a request to yourself! <br />";
+    }
+    else
+    {
+      $request_query=mysqli_query($db, "INSERT INTO friend_requests VALUES('','$user_from','$user_to')");
+      $error_send="Friend request send! <br />";
+    }
   }
   else
   {
-    $profilepic="userdata/profile_pics/".$profilepic;
+      //nothing
   }
-}
-if (isset($_POST['sendmsg']))
-{
- header("Location: chat.php?u=$user");
-}
-//Add as Friend
-$error_send="";
-if (isset($_POST['addasfriend']))
-{
-  $friend_request=$_POST['addasfriend'];
-  $user_to=$user;
-  $user_from=$username;
-
-  if($user_to==$user_from)
-  {
-    $error_send= "Hi lonely, bt you can't send a request to yourself! <br />";
-
-  }
-  else
-  {
-    $request_query=mysqli_query($db, "INSERT INTO friend_requests VALUES('','$user_from','$user_to')");
-    $error_send="Friend request send! <br />";
-  }
-}
-?>
+  ?>
 </div>
-<img src=<?php echo $profilepic; ?> height="200" width="200 "  />
+<img src=<?php echo $profilepic;?> height="200" width="200" />
 <form action="<?php echo $user; ?>" method="POST">
 <?php
 $friendarray="";
@@ -132,21 +124,19 @@ if($friendarray!="")
   $friendarray=explode(",",$friendarray);
   $countfriend=count($friendarray);
   $friendarray12= array_slice($friendarray,0,12);
-
   $i=0;
   if($username!=$user)
   {
     if(in_array($username,$friendarray))
     {
       $addasfriend='<input type="submit" name="removefriend" class="btnn btn--secondary " value="Remove Friend" />';
-      $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary msg" value="Message" />';
+      $sendmessage='<input type="submit" name="sendmsg1" class="btnn btn--primary msg" value="Message" />';
       $pokefriend='<input type="submit" name="poke" class="btnn btn--primary poke" value="Poke" />';
-
     }
     else
     {
       $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
-      $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary msg" value="Message" />';
+      $sendmessage='<input type="submit" name="sendmsg1" class="btnn btn--primary msg" value="Message" />';
       $pokefriend='<input type="submit" name="poke" class="btnn btn--primary poke" value="Poke" />';
     }
   }
@@ -162,7 +152,7 @@ else
   if($username!=$user)
   {
     $addasfriend='<input type="submit" name="addasfriend" class="btnn btn--secondary " value="Send Request" />';
-    $sendmessage='<input type="submit" name="sendmsg" class="btnn btn--primary msg" value="Message" />';
+    $sendmessage='<input type="submit" name="sendmsg1" class="btnn btn--primary msg" value="Message" />';
     $pokefriend='<input type="submit" name="poke" class="btnn btn--primary poke" value="Poke" />';
   }
   else
@@ -172,10 +162,6 @@ else
       $pokefriend="";
   }
 }
-
- ?>
-
- <?php
  if(@$_POST['removefriend'])
  {
    $already_friends=mysqli_query($db,"SELECT friend_array FROM users WHERE username='$username'");
@@ -186,7 +172,6 @@ else
    $already_friends_count=count($already_friends_explode);
    $comma=",".$username;
    $comma2=$username.",";
-
    $already_friends_profile=mysqli_query($db,"SELECT friend_array FROM users WHERE username='$user'");
    $already_friends_row_profile=mysqli_fetch_assoc($already_friends_profile);
    $already_friends_array_profile=$already_friends_row_profile['friend_array'];
@@ -221,10 +206,8 @@ else
    {
      $friend2=str_replace("$username","",$already_friends_array_profile);
    }
-
    $removefriend_query=mysqli_query($db, "UPDATE users SET friend_array='$friend1' WHERE username='$username'");
    $removefriend_query_profile=mysqli_query($db, "UPDATE users SET friend_array='$friend2' WHERE username='$user'");
-
    echo "Friend Removed <br />";
    header("Location: $user");
  }
@@ -232,7 +215,6 @@ else
  {
 
  }
-
 if(isset($_POST['poke']))
 {
   $pokecheck_query=mysqli_query($db,"SELECT * FROM pokes WHERE user_from='$username' AND user_to='$user'");
@@ -248,10 +230,7 @@ if(isset($_POST['poke']))
   }
 }
 ?>
-
-<?php echo $error_send; echo $addasfriend; ?>
-<?php echo $sendmessage;echo $pokefriend;?>
-
+<?php echo $error_send;echo $addasfriend;echo $sendmessage; echo $pokefriend?>
 </form>
   <div class="textHeader"><?php echo $firstname?>'s Profile</div>
   <div class="profileLeftSideContent">
@@ -291,4 +270,4 @@ if(isset($_POST['poke']))
   }
   ?>
   </div>
-  <?php include ( "./inc/footer.inc.php" );?>
+  <?php ob_end_flush(); include ( "./inc/footer.inc.php" );?>

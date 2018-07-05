@@ -27,21 +27,22 @@ while ($row= mysqli_fetch_assoc($getposts))
   }
   echo "
   <div class='newsfeed'>
+    <div class='newsfeedoptions$id'>
+      <div class='options$id'></div>
+    </div>
     <div class='posted_by'>
       <img src='userdata/profile_pics/$profilepic_post' height='40' style='border-radius: 50%;'>
       <a href='$added_by'>$firstname_post $lastname_post</a><span>$date_added</span><br />
-
     </div><br />
     &nbsp;&nbsp;<br />
     <div class='actual_post' style='overflox-x: 100px;'>
       $body
-    </div>
-    <br /<br />
+    </div><br />
   </div>
   ";
-}
-
+include ("css/extra/post.css");
+include ("js/post.js  ");
 ?>
 
 
-<?php include ( "./inc/footer.inc.php" );?>
+<?php }include ( "./inc/footer.inc.php" );?>
