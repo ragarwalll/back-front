@@ -95,11 +95,13 @@ while ($row= mysqli_fetch_assoc($getposts))
       </div>
     </div><hr>
     <div class='comments_reveal$id'>
-      <img src='$dp' height='30' style='border-radius: 50%;display:inline-block;'>
-      <form action='./home.php' method='POST' style='display:inline-block;'>
-        <textarea rols='1' cols='70' id='normal' placeholder='enter comment...' name='post_body'></textarea>
-        <input type='submit' name='postComment$id' class='btn_comment' value='Comment'>
-      </form><br><br>
+      <div class='post_com'>
+        <img src='$dp' height='30' style='border-radius: 50%;display:inline-block;'>
+        <form action='./home.php' method='POST' style='display:inline-block;'>
+          <textarea rols='1' cols='70' id='normal' placeholder='enter comment...' name='post_body'></textarea>
+          <input type='submit' name='postComment$id' class='btn_comment' value='Comment'>
+        </form><br><br>
+      </div>
       <script src='js/autoresize.jquery.min.js'></script>
   		<script>
   			$(function(){
