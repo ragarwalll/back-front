@@ -457,6 +457,7 @@ template {
 }
 
 body {
+  background-color: #f7f7f7;
   color: #048ca8;
 }
 
@@ -676,6 +677,7 @@ h2 {
   flex: auto;
   margin-top: 1.3em;
   margin-right: 2em;
+  z-index: 1;
 }
 
 @media (max-width: 1290px) {
@@ -769,6 +771,7 @@ h2 {
   right: 1em;
   top: 1.5em;
   cursor: pointer;
+  z-index: 2;
 }
 
 @media (min-width: 1290px) {
@@ -923,7 +926,7 @@ input[type="password"]:hover, input[type="password"]:focus {
 
 @media (max-width: 800px) {
   #wrapper {
-    width: 100%;
+    width: auto;
   }
 }
 
@@ -958,8 +961,8 @@ input[type="password"]:hover, input[type="password"]:focus {
 .profilePosts {
   float: right;
   width: 560px;
-  height: 414px;
-  background-color: #ffffff;
+  height: auto;
+  background-color: #f7f7f7;
   padding: 5px;
   text-align: justify;
 }
@@ -969,7 +972,8 @@ input[type="password"]:hover, input[type="password"]:focus {
   background-color: #ffffff;
   border: 1px solid #F3F6F9;
   padding: 0.6em;
-  transform: all ease-in-out 250ms;
+  transition: all ease-in-out 250ms;
+  border-radius: 10px;
 }
 
 .newsfeed:hover {
@@ -978,7 +982,6 @@ input[type="password"]:hover, input[type="password"]:focus {
 }
 
 .newsfeed.close {
-  transform: all ease-in-out 250ms;
   display: none;
 }
 
@@ -1007,6 +1010,37 @@ hr {
   padding-left: 0.5em;
 }
 
+#by_user {
+  color: #048ca8;
+  text-decoration: none;
+}
+
+#comment_dp {
+  display: inline;
+  position: absolute;
+  margin-left: 0.3em;
+}
+
+.comment_body {
+  display: inline-block;
+  margin-left: 2.5em;
+  background: #F3F6F9;
+  border: 7px solid #F3F6F9;
+  border-radius: 18px;
+}
+
+#by_user {
+  font-size: 15px;
+}
+
+#by_user:hover {
+  text-decoration: underline;
+}
+
+.comment_body span {
+  font-size: 14px;
+}
+
 .posted_by span {
   font-weight: 300;
   font-size: 0.8em;
@@ -1015,19 +1049,7 @@ hr {
 }
 
 .actual_post {
-  width: 400px;
-}
-
-@media (max-width: 450px) {
-  .actual_post {
-    width: 300px;
-  }
-}
-
-@media (max-width: 350px) {
-  .actual_post {
-    width: 250px;
-  }
+  width: auto;
 }
 
 .posted_by a:hover {

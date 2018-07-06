@@ -8,7 +8,7 @@
   padding-left: 10px
   padding-right: 10px
   @media (max-width: 800px)
-    width: 100%
+    width: auto
 
 .textHeader
   background-color: #f3f6f9
@@ -38,8 +38,8 @@
 .profilePosts
     float: right
     width: 560px
-    height: 414px
-    background-color: #ffffff
+    height: auto
+    background-color: #f7f7f7
     padding: 5px
     text-align: justify
 
@@ -48,14 +48,13 @@
   background-color: #ffffff
   border: 1px solid #F3F6F9
   padding: 0.6em
-  transform: all ease-in-out 250ms
+  transition: all ease-in-out 250ms
+  border-radius: 10px
   &:hover
     background-color: #F3F6F9
     border: 1px solid #F3F6F9
   &.close
-    transform: all ease-in-out 250ms
     display: none
-
 
 hr
   background-color: #dce5ee
@@ -79,6 +78,31 @@ hr
   position: absolute
   padding-left: 0.5em
 
+#by_user
+  color: #048ca8
+  text-decoration: none
+  //position: absolute
+  //padding-left: 0.9em
+#comment_dp
+  display: inline
+  position: absolute
+  margin-left: 0.3em
+
+.comment_body
+  display: inline-block
+  margin-left: 2.5em
+  background: #F3F6F9
+  border: 7px solid #F3F6F9
+  border-radius: 18px
+
+#by_user
+  font-size: 15px
+  &:hover
+    text-decoration: underline
+
+.comment_body span
+  font-size: 14px
+  //width: auto
 .posted_by span
   font-weight: $font-light
   font-size: 0.8em
@@ -86,10 +110,10 @@ hr
   padding-left: 0.7em
 
 .actual_post
-  width: 400px
-  @media(max-width: 450px)
+  width: auto
+  //@media(max-width: 450px)
     width: 300px
-  @media(max-width: 350px)
+  //@media(max-width: 350px)
     width: 250px
 
 .posted_by a:hover

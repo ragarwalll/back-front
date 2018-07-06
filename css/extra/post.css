@@ -40,5 +40,34 @@
   transform: translateY(-4px);
   background: #16db93;
 }
+.like<?php echo $id;?>{
+  width: 49%;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.like<?php echo $id;?>:hover{
+  background-color: #eaf1f9
+}
+.comment<?php echo $id;?>{
+  width: 49%;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.comment<?php echo $id;?>:hover{
+  background-color: #eaf1f9;
+}
+.postspublic<?php echo $id;?>{
+  text-align: center;
+}
+.comments_reveal<?php echo $id;?>{
+  display: none;
+}
+.comments_reveal<?php echo $id;?>.open{
+  display: block;
+  width: auto;
+  height: auto;
+}
 
 </style>

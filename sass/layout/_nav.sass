@@ -6,6 +6,7 @@
   flex: auto
   margin-top: 1.3em
   margin-right: 2em
+  z-index: 1
   @media (max-width: 1290px)
     position: absolute
     background: $accent
@@ -16,6 +17,7 @@
     font-size: 1.2em
     overflow: hidden
     transition: all ease-in-out 250ms
+    //transition-delay: 2s
     &.is-open
       left: 0
 
@@ -74,6 +76,7 @@
   right: 1em
   top: 1.5em
   cursor: pointer
+  z-index: 2
   @media (min-width: 1290px)
     display: none
 
