@@ -1,14 +1,40 @@
 #toggleText
   float: right
 
-.message_left
-  left: 0
-  width: 200px
+.message_left2
+  display: inline-block
+  width: 39%
 
-.message_right
+.message_left1
+  display: inline-block
+  left: 0
+  width: 59%
+  text-align: left
+
+.message_left1 span
+  display: inline-block
+  background-color: #ffffff
+  word-wrap: break-word
+  border-radius: 15px 50px 30px 5px
+  border: 10px solid #ffffff
+
+.message_right1
+  display: inline-block
+  width: 39%
+
+.message_right2
+  display: inline-block
   right: 0
-  max-width: 800px
+  width: 59%
   text-align: right
+
+.message_right2 span
+  display: inline-block
+  background-color: #ffffff
+  word-wrap: break-word
+  border-radius: 50px 15px 5px 30px
+  border: 10px solid #ffffff
+
 #displayText
   text-decoration: none
   color: $main
@@ -26,8 +52,39 @@
   background-color: white
   text-align: justify
   text-align: center
+  background-color: #f7f7f7
   &.close
     display: none
+
+#message_area
+  width: auto
+  border-radius: 8px
+  background: #ffffff
+  text-decoration: none
+  border: 2px solid $main
+  //border-top: solid #ffffff
+  resize: none
+  overflow-y: hidden
+
+#message_area:focus
+  outline: none
+//#message_area
+  width: auto
+  border-radius: 18px
+  background: #F3F6F9
+  text-decoration: none
+  border: solid #F3F6F9
+  border-top: solid #F3F6F9
+  resize: none
+  overflow-y: hidden
+  &::placeholder
+    //padding-top: 0.3em
+    padding-left: 0.5em
+//#message_area:focus
+  outline: none
+  padding-top: 0.3em
+  padding-left: 0.5em
+
 #send_message
   position: absolute
   margin-left: 1em

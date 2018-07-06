@@ -85,15 +85,50 @@ hr
   //padding-left: 0.9em
 #comment_dp
   display: inline
-  position: absolute
   margin-left: 0.3em
 
 .comment_body
   display: inline-block
-  margin-left: 2.5em
   background: #F3F6F9
   border: 7px solid #F3F6F9
   border-radius: 18px
+  position: relative
+  top: -0.5em
+
+#normal
+  width: auto
+  border-radius: 18px
+  background: #F3F6F9
+  text-decoration: none
+  border: solid #F3F6F9
+  border-top: solid #F3F6F9
+  resize: none
+  overflow-y: hidden
+  color: $main
+  &::placeholder
+    padding-top: 0.5em
+    padding-left: 0.5em
+  @media (max-width: 760px)
+    width: 400px
+  @media (max-width: 570px)
+    width: 300px
+  @media (max-width: 480px)
+    width: 200px
+  @media (max-width: 370px)
+    width: 150px
+#normal:focus
+  outline: none
+  padding-top: 0.3em
+  padding-left: 0.5em
+
+.btn_comment
+  padding: 0
+  border: 0
+  background-color: inherit
+  cursor: pointer
+  color: inherit
+  &:hover
+    text-decoration: underline
 
 #by_user
   font-size: 15px

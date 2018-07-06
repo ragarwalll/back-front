@@ -59,8 +59,10 @@ if (isset($_GET['u']))
           if($get_messages_user_from==$username && $get_messages_user_to==$user)
           {
             echo "
-            <div class='message_right'>
-              $get_messages<h6>$get_messages_date</h6>
+            <div class='message_right1'>
+            </div>
+            <div class='message_right2'>
+              <span>$get_messages</span><h6>$get_messages_date</h6>
             </div>
             ";
             echo "<hr />";
@@ -68,8 +70,10 @@ if (isset($_GET['u']))
           else//if($get_messages_user_from==$user && $get_messages_user_to==$username)
           {
             echo "
-              <div class='message_left'>
-                $get_messages<h6>$get_messages_date</h6>
+              <div class='message_left1'>
+                <span>$get_messages</span><h6>$get_messages_date</h6>
+              </div>
+              <div class='message_left2'>
               </div>
             ";
             echo "<hr />";
@@ -79,11 +83,14 @@ if (isset($_GET['u']))
         echo "
         <br><br><br></div>
           <div class='chat_it'>
+            <div id='wrapper'>
             <form action='chat.php?u=$user' method='POST'>
-              <textarea id='message_area' cols='30' rows='2' name='msg_body' style='width:50%'>Enter your message....</textarea>
+              <textarea id='message_area' cols='50' rows='2' name='msg_body' style='width:50%'>Enter your message....</textarea>
               <input id='send_message' type='submit' class='btn btn--secondary' name='submit' value='Send Message'>
             </form>
-          <div>
+            </div>
+          </div>
+          <script src='js/bottom_scroll.js' language='javascript' type='text/javascript'></script>
         ";
       }
       else
@@ -101,5 +108,4 @@ if (isset($_GET['u']))
 }
 ?>
 
-<script src="js/bottom_scroll.js" language="javascript" type="text/javascript"></script>
 <?php include ( "./inc/footer.inc.php" );?>

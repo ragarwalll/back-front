@@ -1,5 +1,5 @@
 <?php
-include ( "./inc/header.inc.php" );
+include ( "./inc/header.inc.php");
 if($username)
 {
 
@@ -12,6 +12,7 @@ else
 <?php
 //get posts
 $getposts=mysqli_query($db,"SELECT * FROM posts WHERE user_posted_to='$username' ORDER BY id DESC LIMIT 10") or die(mysqlerror());
+
 while ($row= mysqli_fetch_assoc($getposts))
 {
   $id=$row['id'];
@@ -42,6 +43,36 @@ while ($row= mysqli_fetch_assoc($getposts))
       $profilepic_post="userdata/profile_pics/".$profilepic_post;
     }
   }
+  //profile_picture of the user logged include
+  $logged_profile_picture_query=mysqli_query($db,"SELECT profile_pic FROM users WHERE username='$username'");
+  $dp_fetch=mysqli_fetch_assoc($logged_profile_picture_query);
+  $dp=$dp_fetch['profile_pic'];
+  if($dp=="")
+  {
+    $dp="img/default_dp.jpg";
+  }
+  else
+  {
+    if(!file_exists("userdata/profile_pics/".$dp))
+    {
+      $dp="img/default_dp.jpg";
+    }
+    else
+    {
+      $dp="userdata/profile_pics/".$dp;
+    }
+  }
+  //Posting comments
+  if (isset($_POST['postComment' . $id . '']))
+  {
+    $comment_posted=$_POST['post_body'];
+    $insert_comment_query=mysqli_query($db,"INSERT INTO post_comments VALUES ('','$comment_posted','$username','$added_by','0','$id')");
+    //echo "Comment Posted";
+    echo "
+    <script>
+        alert('Comment Posted');
+    </script>";
+  }
   echo "
   <div class='newsfeed'>
     <div class='newsfeedoptions$id'>
@@ -63,6 +94,18 @@ while ($row= mysqli_fetch_assoc($getposts))
         Comment
       </div>
     </div><hr>
+    <div class='comments_reveal$id'>
+      <img src='$dp' height='30' style='border-radius: 50%;display:inline-block;'>
+      <form action='./home.php' method='POST' style='display:inline-block;'>
+        <textarea rols='1' cols='70' id='normal' placeholder='enter comment...' name='post_body'></textarea>
+        <input type='submit' name='postComment$id' class='btn_comment' value='Comment'>
+      </form><br><br>
+      <script src='js/autoresize.jquery.min.js'></script>
+  		<script>
+  			$(function(){
+  				$('#normal').autosize();
+  			});
+  		</script>
     ";
     include ("js/post.js");
     //get comments
@@ -102,13 +145,12 @@ while ($row= mysqli_fetch_assoc($getposts))
         }
 
         echo"
-        <div class='comments_reveal$id'><br>
           <img id='comment_dp' src='$comment_profilepic_post' height='30' style='border-radius: 50%;'>
           <div class='comment_body'>
             <a href='$comment_posted_by' id='by_user'>$comment_firstname_post $comment_lastname_post</a>
             <span>$comment_body</span>
-          </div><br />
-        </div>
+          </div><br /><br />
+
         ";
       }
     }
@@ -124,5 +166,7 @@ while ($row= mysqli_fetch_assoc($getposts))
   include ("js/comments_reveal.js");
 
 ?>
+</div>
 </div></br>
-<?php }include ( "./inc/footer.inc.php" );?>
+<?php }
+include ( "./inc/footer.inc.php" );?>

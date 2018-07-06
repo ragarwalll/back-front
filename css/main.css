@@ -1017,16 +1017,75 @@ hr {
 
 #comment_dp {
   display: inline;
-  position: absolute;
   margin-left: 0.3em;
 }
 
 .comment_body {
   display: inline-block;
-  margin-left: 2.5em;
   background: #F3F6F9;
   border: 7px solid #F3F6F9;
   border-radius: 18px;
+  position: relative;
+  top: -0.5em;
+}
+
+#normal {
+  width: auto;
+  border-radius: 18px;
+  background: #F3F6F9;
+  text-decoration: none;
+  border: solid #F3F6F9;
+  border-top: solid #F3F6F9;
+  resize: none;
+  overflow-y: hidden;
+  color: #048ca8;
+}
+
+#normal::placeholder {
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+}
+
+@media (max-width: 760px) {
+  #normal {
+    width: 400px;
+  }
+}
+
+@media (max-width: 570px) {
+  #normal {
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  #normal {
+    width: 200px;
+  }
+}
+
+@media (max-width: 370px) {
+  #normal {
+    width: 150px;
+  }
+}
+
+#normal:focus {
+  outline: none;
+  padding-top: 0.3em;
+  padding-left: 0.5em;
+}
+
+.btn_comment {
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.btn_comment:hover {
+  text-decoration: underline;
 }
 
 #by_user {
@@ -1211,15 +1270,44 @@ h4:hover, h4:focus {
   float: right;
 }
 
-.message_left {
-  left: 0;
-  width: 200px;
+.message_left2 {
+  display: inline-block;
+  width: 39%;
 }
 
-.message_right {
+.message_left1 {
+  display: inline-block;
+  left: 0;
+  width: 59%;
+  text-align: left;
+}
+
+.message_left1 span {
+  display: inline-block;
+  background-color: #ffffff;
+  word-wrap: break-word;
+  border-radius: 15px 50px 30px 5px;
+  border: 10px solid #ffffff;
+}
+
+.message_right1 {
+  display: inline-block;
+  width: 39%;
+}
+
+.message_right2 {
+  display: inline-block;
   right: 0;
-  max-width: 800px;
+  width: 59%;
   text-align: right;
+}
+
+.message_right2 span {
+  display: inline-block;
+  background-color: #ffffff;
+  word-wrap: break-word;
+  border-radius: 50px 15px 5px 30px;
+  border: 10px solid #ffffff;
 }
 
 #displayText {
@@ -1243,10 +1331,25 @@ h4:hover, h4:focus {
   background-color: white;
   text-align: justify;
   text-align: center;
+  background-color: #f7f7f7;
 }
 
 .chat_it.close {
   display: none;
+}
+
+#message_area {
+  width: auto;
+  border-radius: 8px;
+  background: #ffffff;
+  text-decoration: none;
+  border: 2px solid #048ca8;
+  resize: none;
+  overflow-y: hidden;
+}
+
+#message_area:focus {
+  outline: none;
 }
 
 #send_message {
