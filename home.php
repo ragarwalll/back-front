@@ -62,6 +62,60 @@ while ($row= mysqli_fetch_assoc($getposts))
       $dp="userdata/profile_pics/".$dp;
     }
   }
+  //check if username likes or note
+  $likes_query=mysqli_query($db, "SELECT * FROM likes WHERE post_id='$id' AND user_liked='$username'");
+  $likes_row=mysqli_num_rows($likes_query);
+  //like$
+  $get_likes_query_id=mysqli_query($db, "SELECT max(id) FROM likes WHERE post_id='$id'");
+  $get_id_fetch=mysqli_fetch_assoc($get_likes_query_id);
+  $lid=$get_id_fetch['max(id)'];
+  $get_likes_query=mysqli_query($db, "SELECT total_likes FROM likes WHERE id='$lid'");
+  $get_likes_row=mysqli_num_rows($get_likes_query);
+  $get_likes_fetch=mysqli_fetch_assoc($get_likes_query);
+  $total_like_nos=$get_likes_fetch['total_likes'];
+  if($total_like_nos == NULL)
+  {
+    $total_like_nos=0;
+    $total_like=$total_like_nos;
+  }
+  else
+  {
+    $total_like=$total_like_nos;
+  }
+  if (isset($_POST['like' . $id . '']))
+  {
+    $new_total_like=++$total_like_nos;
+    $new_like_query=mysqli_query($db,"INSERT INTO likes VALUES('','$username','$new_total_like','$id')");
+    echo "
+    <script>
+        alert('Post Liked!');
+    </script>";
+    $likes_row=1;
+    $total_like=++$total_like;
+  }
+  if (isset($_POST['unlike' . $id . '']))
+  {
+    $new_unlike_query=mysqli_query($db,"DELETE FROM likes WHERE post_id='$id' AND user_liked='$username'");
+
+    $get_likes_query_id=mysqli_query($db, "SELECT max(id) FROM likes WHERE post_id='$id'");
+    $get_id_fetch=mysqli_fetch_assoc($get_likes_query_id);
+    $lid=$get_id_fetch['max(id)'];
+    if($lid == NULL)
+    {
+      $total_like_nos=0;
+      $total_like=$total_like_nos;
+    }
+    else
+    {
+      $new_total_like=--$total_like_nos;
+      $get_likes_query=mysqli_query($db, "UPDATE likes SET total_likes='$new_total_like' WHERE id='$lid'");
+    }
+    echo "
+    <script>
+        alert('Post Unliked!');
+    </script>";
+    $likes_row=0;
+  }
   //Posting comments
   if (isset($_POST['postComment' . $id . '']))
   {
@@ -85,11 +139,31 @@ while ($row= mysqli_fetch_assoc($getposts))
     &nbsp;&nbsp;<br />
     <div class='actual_post' style='overflox-x: 100px;'>
       $body
-    </div><hr />
-    <div class='postspublic$id'>
+    </div>
+    <div style='color: rgba(22, 219, 147, 1); font-size: 0.8em;'>
+      $total_like people likes this
+    </div>
+    <hr />
+    <div class='postspublic$id'>";
+    if($likes_row==1)
+    {
+      echo"
+      <div class='like$id' >
+        <form action='./home.php' method='POST'>
+          <input type='submit' name='unlike$id' class='btn_like' value='Unlike'>
+        </form>
+      </div>";
+    }
+    else
+    {
+      echo"
       <div class='like$id'>
-        Like
-      </div>
+        <form action='./home.php' method='POST'>
+          <input type='submit' name='like$id' class='btn_like' value='Like'>
+        </form>
+      </div>";
+    }
+    echo"
       <div class='comment$id'>
         Comment
       </div>

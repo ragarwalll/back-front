@@ -1076,6 +1076,14 @@ hr {
   padding-left: 0.5em;
 }
 
+.btn_like {
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
 .btn_comment {
   padding: 0;
   border: 0;
