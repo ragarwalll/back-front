@@ -36,7 +36,7 @@ if($read_row>0)
           $msg_body=$msg_body;
       }
       echo "<a id='name' href='$user_from'>$fname $lname($read_count_row):</a>&nbsp<br>
-      <a id='displayText' href='chat.php?u=$user_from'>&nbsp$msg_body</a><hr />
+      <a id='displayText' href='messenger.php?profile=$user_from'>&nbsp$msg_body</a><hr />
       ";
       }
     }
@@ -84,7 +84,7 @@ if($read_row>0)
           $msg_body=$msg_body;
       }
       echo "<a id='name' href='$user_from'>$fname $lname:</a>&nbsp<br>
-      <a id='displayText' href='chat.php?u=$user_from'>&nbsp$msg_body</a><hr />
+      <a id='displayText' href='messenger.php?profile=$user_from'>&nbsp$msg_body</a><hr />
       ";
       }
     }

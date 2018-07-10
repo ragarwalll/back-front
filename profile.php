@@ -176,7 +176,7 @@ include ("js/comments_reveal.js");
   //Messaging
   $error_send="";
   if (isset($_POST['sendmsg1'])) {
-  	 header("Location: chat.php?u=$user");
+  	 header("Location: messenger.php?profile=$user");
   	}
   //Add as Friend
   if (isset($_POST['addasfriend']))

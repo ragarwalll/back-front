@@ -59,13 +59,13 @@ if (isset($_GET['u']))
           if($get_messages_user_from==$username && $get_messages_user_to==$user)
           {
             echo "
+            <div class='show'>
             <div class='message_right1'>
             </div>
             <div class='message_right2'>
               <span>$get_messages</span><h6>$get_messages_date</h6>
             </div>
-            ";
-            echo "<hr />";
+            <hr /></div>";
           }
           else//if($get_messages_user_from==$user && $get_messages_user_to==$username)
           {
@@ -75,8 +75,7 @@ if (isset($_GET['u']))
               </div>
               <div class='message_left2'>
               </div>
-            ";
-            echo "<hr />";
+              <hr />";
 
           }
         }
